@@ -5,11 +5,6 @@ import requests
 from bs4 import BeautifulSoup
 import execjs
 
-# https://www.scrapingbee.com/blog/python-requests-proxy/
-proxies = {
-   'http': 'http://127.0.0.1:8080',
-   'https': 'http://127.0.0.1:8090',
-}
 
 username = os.environ.get("UI_USERNAME")
 password = os.environ.get("UI_PASSWORD")
@@ -66,12 +61,11 @@ for script in scripts:
       response =  requests.post(
          f"{url}/login", 
          data=data, 
-         headers=headers,
-         proxies=proxies)
+         headers=headers)
 
       # check status page
       response =  requests.get(
          f"{url}/status",
-         headers=headers,
-         proxies=proxies)
+         headers=headers)
+      
       print(response.text)
